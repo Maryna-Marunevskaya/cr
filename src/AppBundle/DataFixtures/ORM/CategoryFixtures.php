@@ -21,4 +21,8 @@ class CategoryFixtures extends AbstractFixture implements OrderedFixtureInterfac
 
         $manager->flush();
     }
+    public function getOrder()
+    {
+        return 1;
+    }
 }

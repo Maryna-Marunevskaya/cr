@@ -5,11 +5,11 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="request")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\RequestRepository")
+ * @ORM\Table(name="enquiry")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\EnquiryRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class Request
+class Enquiry
 {
     /**
      * @ORM\Column(name="id", type="integer")
@@ -17,10 +17,14 @@ class Request
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+     /**
+    * @ORM\Column(name="enquiry", type="string", nullable=false)
+    **/
+    protected $enquiry;
     /**
      * @ORM\ManyToMany(targetEntity="Category")
-     * @ORM\JoinTable(name="request_category",
-     *     joinColumns={@ORM\JoinColumn(name="request_id", referencedColumnName="id", nullable=false)},
+     * @ORM\JoinTable(name="enquiry_category",
+     *     joinColumns={@ORM\JoinColumn(name="enquiry_id", referencedColumnName="id", nullable=false)},
      *     inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)}
      * )
      */
@@ -44,11 +48,35 @@ class Request
     }
 
     /**
+     * Set enquiry
+     *
+     * @param string $enquiry
+     *
+     * @return Enquiry
+     */
+    public function setEnquiry($enquiry)
+    {
+        $this->enquiry = $enquiry;
+
+        return $this;
+    }
+
+    /**
+     * Get enquiry
+     *
+     * @return string
+     */
+    public function getEnquiry()
+    {
+        return $this->enquiry;
+    }
+
+    /**
      * Add category
      *
      * @param \AppBundle\Entity\Category $category
      *
-     * @return Request
+     * @return Enquiry
      */
     public function addCategory(\AppBundle\Entity\Category $category)
     {

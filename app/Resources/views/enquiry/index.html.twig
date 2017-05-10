@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-   <h2 class="page-header">Requests</h2>
+   <h2 class="page-header">Enquiries</h2>
     <table class="table table-stripped">
     <thead>
     <tr>
@@ -10,9 +10,9 @@
     </tr>
     </thead>
     <tbody>
-    {% for request in requests %}
+    {% for enquiry in enquiries %}
     <tr>
-    <th scope="row">{{request.id}}</th>
+    <th scope="row">{{enquiry.id}}</th>
     </tr>
     {% endfor %}
     </tbody>

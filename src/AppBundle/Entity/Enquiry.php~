@@ -1,0 +1,32 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Table(name="enquiry")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\EnquiryRepository")
+ * @ORM\HasLifecycleCallbacks
+ */
+class Enquiry
+{
+    /**
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+     /**
+    * @ORM\Column(name="enquiry", type="string", nullable=false)
+    **/
+    protected $enquiry;
+    /**
+     * @ORM\ManyToMany(targetEntity="Category")
+     * @ORM\JoinTable(name="enquiry_category",
+     *     joinColumns={@ORM\JoinColumn(name="enquiry_id", referencedColumnName="id", nullable=false)},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)}
+     * )
+     */
+    protected $categories;
+}
