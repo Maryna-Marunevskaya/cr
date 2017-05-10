@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+   <h2 class="page-header">Requests</h2>
+    <table class="table table-stripped">
+    <thead>
+    <tr>
+    <th>#</th>
+    <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for request in requests %}
+    <tr>
+    <th scope="row">{{request.id}}</th>
+    </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+{% endblock %}
