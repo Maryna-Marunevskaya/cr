@@ -11,7 +11,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-
 class PageController extends Controller
 {
     /**
@@ -29,13 +28,19 @@ class PageController extends Controller
     public function createAction(Request $request)
     {
         $enquiry = new Enquiry;
-        $form=$this->createFormBuilder($enquiry)->add('enquiry', TextareaType::class, array('label'=>'Запрос','attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px')))->add('categories', EntityType::class, array('label'=>'Выберите категорию или категории','class' =>'AppBundle:Category','choice_label' => 'category','multiple' => true,'expanded' => true
-))->add('save', SubmitType::class, array('label'=>'Добавить запрос','attr'=>array('class'=>'btn btn-primary', 'style'=>'margin-bottom:15px')))->getForm();
+        $form=$this->createFormBuilder($enquiry)->add('enquiry', TextareaType::class, array('label'=>'Запрос','attr'=>array('class'=>'form-control', 'style'=>'margin-bottom:15px')))->add('categories', EntityType::class, array('label'=>'Выберите категорию или категории','class' =>'AppBundle:Category','choice_label' => 'category','multiple' => true,'expanded' => true))->add('save', SubmitType::class, array('label'=>'Добавить запрос','attr'=>array('class'=>'btn btn-primary', 'style'=>'margin-bottom:15px')))->getForm();
         $form->handleRequest($request);
 
         if($form->isSubmitted()&&$form->isValid()){
             $req=$form['enquiry']->getData();
             $enquiry->setEnquiry($req);
+
+            $categories=$form['categories']->getData();
+
+            $num=count($categories);
+            for($i=0; $i<$num; $i++){
+               // $enquiry->addCategory($categories[$i]);
+            }
 
             $em=$this->getDoctrine()->getManager();
 

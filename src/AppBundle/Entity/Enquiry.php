@@ -22,11 +22,8 @@ class Enquiry
     **/
     protected $enquiry;
     /**
-     * @ORM\ManyToMany(targetEntity="Category")
-     * @ORM\JoinTable(name="enquiry_category",
-     *     joinColumns={@ORM\JoinColumn(name="enquiry_id", referencedColumnName="id", nullable=false)},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)}
-     * )
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="enquiries")
+     * @ORM\JoinTable(name="enquiry_category")
      */
     protected $categories;
     /**

@@ -21,7 +21,10 @@ class Category
     * @ORM\Column(name="category", type="string", unique=true, nullable=false)
     **/
     protected $category;
-
+    /**
+ * @ORM\ManyToMany(targetEntity="Enquiry", mappedBy="categories")
+ */
+protected $enquiries;
     /**
      * Get id
      *
@@ -54,5 +57,46 @@ class Category
     public function getCategory()
     {
         return $this->category;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->enquiries = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add enquiry
+     *
+     * @param \AppBundle\Entity\Enquiry $enquiry
+     *
+     * @return Category
+     */
+    public function addEnquiry(\AppBundle\Entity\Enquiry $enquiry)
+    {
+        $this->enquiries[] = $enquiry;
+
+        return $this;
+    }
+
+    /**
+     * Remove enquiry
+     *
+     * @param \AppBundle\Entity\Enquiry $enquiry
+     */
+    public function removeEnquiry(\AppBundle\Entity\Enquiry $enquiry)
+    {
+        $this->enquiries->removeElement($enquiry);
+    }
+
+    /**
+     * Get enquiries
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEnquiries()
+    {
+        return $this->enquiries;
     }
 }
